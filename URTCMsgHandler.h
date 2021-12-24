@@ -3,16 +3,20 @@
 #include <string>
 #include "RTCDefine.h"
 #include "RTCEngineBase.h"
+#include "MyVideoRender.h"
+
+typedef void (*Fun)(int, char *);
 
 class URTCMsgHandler : public MsgHandler{
 public:
-    URTCMsgHandler(RTCEngineBase* rtcengine) ;
+    URTCMsgHandler(RTCEngineBase* rtcengine , Fun callback) ;
     virtual ~URTCMsgHandler() ;
 
     void setUserId(std::string& roomid) ;
     void setRoomId(std::string& userid) ;
+    std::string getUserId(); 
+    void onMessage(int eventid, std::string jsonmsg);
 
-	void onMessage(int eventid, std::string jsonmsg);
 
 private :
     void onJoinRoomHandler(std::string& jsonmsg) ;
@@ -24,11 +28,15 @@ private :
     void onFileDataBeginHandler(std::string& jsonmsg) ;
     void onFileDataEndHandler(std::string& jsonmsg) ;
     void onFileListEndHandler(std::string& jsonmsg) ;
+    void onSubscribeRespHandler(std::string& jsonmsg);    
 
 private:
     RTCEngineBase* mRtcengine ;
     std::string mRoomId ;
     std::string mUserId ;
+    Fun mCallback; 
+    tUCloudRtcVideoCanvas canvas;
+    MyVideoRender myrender ; 
 };
 #endif
 

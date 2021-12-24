@@ -502,7 +502,7 @@ void URTCEventHandler::onSendRTCStats(tUCloudRtcStreamStats& rtstats)
 	writer.Key("ttype");
 	writer.Int(rtstats.mTracktype);
 	writer.Key("uid");
-	writer.String(rtstats.mUserId);
+	writer.String("");//rtstats.mUserId);
 
 	if (rtstats.mTracktype == UCLOUD_RTC_TRACKTYPE_AUDIO)
 	{
@@ -543,7 +543,7 @@ void URTCEventHandler::onUpNetworkState(tUCloudRtcUpNetworkSt& rtcst)
 	writer.Key("mtype");
 	writer.Int(rtcst.mStreamMtype);
 	writer.Key("uid");
-	writer.String(rtcst.mUserId);
+	writer.String("");//rtcst.mUserId);
 	writer.Key("availbw");
 	writer.Int(rtcst.mAvailSendBw);
 	writer.Key("retranbw");

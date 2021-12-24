@@ -56,6 +56,8 @@ public:
 
 	virtual int StartMixFile(const char* filepath, bool replace, bool loop, float musicvol);
 	virtual int StopMixFile();
+	virtual int StartRemoteView(tUCloudRtcVideoCanvas canvas);
+	virtual int StopRemoteView (tUCloudRtcVideoCanvas canvas)  ;
 private:
 
 	UCloudRtcEngine*   m_rtcengine;

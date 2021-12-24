@@ -58,6 +58,8 @@ public:
 
 	virtual int StartMixFile(const char* filepath, bool replace, bool loop, float musicvol) = 0;
 	virtual int StopMixFile() = 0;
+	virtual int StartRemoteView(tUCloudRtcVideoCanvas canvas) =0 ;
+	virtual int StopRemoteView (tUCloudRtcVideoCanvas canvas) =0 ;
 };
 
 #endif

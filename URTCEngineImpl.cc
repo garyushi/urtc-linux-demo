@@ -31,12 +31,12 @@ int URTCEngineImpl::InitRTCEngine(const char* logdir,const char* logname, int lo
 	m_rtcengine->configLocalCameraPublish(URTCConfig::getInstance()->isAutoPubVideo());
 	m_rtcengine->configLocalScreenPublish(URTCConfig::getInstance()->isAutoPubScreen());
 	tUCloudRtcVideoConfig config ;
-	config.mHeight = 720 ;
+	config.mHeight = 720;
 	config.mWidth = 1280 ;
 	config.mFrameRate = 30 ;
 	config.mMaxBitrate = 800 ;
 	config.mMinBitrate = 200 ;
-	m_rtcengine->setVideoProfile(UCLOUD_RTC_VIDEO_PROFILE_NONE, config);
+	m_rtcengine->setVideoProfile(UCLOUD_RTC_VIDEO_PROFILE_1280_720, config);
 	m_rtcengine->setDesktopProfile(UCLOUD_RTC_SCREEN_PROFILE_HIGH);
 	m_rtcengine->setSdkMode(URTCConfig::getInstance()->getSdkMode());
 	m_rtcengine->setVideoCodec(UCLOUD_RTC_CODEC_H264) ;
@@ -212,6 +212,7 @@ int URTCEngineImpl::PublishStream(tRTCStreamInfo& streaminfo)
 {
 	if (m_rtcengine)
 	{
+		m_rtcengine->configLocalCameraPublish(true);
 		return m_rtcengine->publish((eUCloudRtcMeidaType)streaminfo.mStreamMtype, streaminfo.mEnableVideo, streaminfo.mEnableAudio);
 	}
 	return -1;
@@ -416,3 +417,21 @@ int URTCEngineImpl::StopMixFile()
 	}
 	return -1;
 }
+
+int URTCEngineImpl::StartRemoteView (tUCloudRtcVideoCanvas canvas)
+{
+        if (m_rtcengine)
+        {
+                return m_rtcengine->startRemoteView(canvas);
+        }
+	return -1;
+}
+
+int URTCEngineImpl::StopRemoteView (tUCloudRtcVideoCanvas canvas)
+{
+        if (m_rtcengine)
+        {
+                return m_rtcengine->stopRemoteView(canvas);
+        }
+        return -1;
+} 

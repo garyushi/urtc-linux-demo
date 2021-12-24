@@ -1,10 +1,11 @@
 
 project(urtcenginedemo)
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.8)
 set(CMAKE_BUILD_TYPE "release")
-set(CMAKE_CXX_FLAGS "-Wall -std=gnu++11 -g -o3 -fpermissive -fPIC")
-set(ENGINEDEMO_LDFLAGS "-Wl,-rpath ")
+set(CMAKE_CXX_FLAGS "-Wall -std=gnu++11 -g -ggdb -o3 -fpermissive -fPIC")
+set(ENGINEDEMO_LDFLAGS "-Wl,-rpath -LZ")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 set(THIRDPARTY ${PROJECT_SOURCE_DIR}/third_party)
 set(RAPIDJSON ${THIRDPARTY}/rapidjson/include)
@@ -38,5 +39,5 @@ link_libraries(
     "liburtcmediaengine.so"
 )
 
-add_executable(enginedemo ${SRCS})
-target_link_libraries(enginedemo dl pthread stdc++)
+add_library(urtclib  SHARED ${SRCS}  ) 
+target_link_libraries( urtclib dl  stdc++ -lpthread -lm)
