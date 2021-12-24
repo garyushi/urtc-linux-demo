@@ -14,12 +14,17 @@ URTC 以动态链接库的方式提供SDK，包括头文件和动态链接库文
 
 URTC DEMO为开源，用户可以直接使用到自己的产品中。
 
-## DEMO及SDK使用注意事项
+## DEMO及SDK提供的功能
 
-- 该SDK的视频源为 mp4，`main.cpp`中的`urtcengine->AddFileList(files, true)`
-- 推流成功，用户可以处理回调函数`URTCEventHandler.cpp`中的`onLocalPublish`处理，如果`code==0`，则推流成功
-- 单个文件播放回调 回调函数`URTCEventHandler.cpp`中的`onFileDataEnd`处理，`filename 表示电脑前播完文件名称`
-- 列表播放完毕 回调函数`URTCEventHandler.cpp`中的`onFileListEnd`处理，`filename为“”`
+- DEMO的入口在Python中
+- 加入房间
+- 从远程拉流
+- 将远程流解码成I420的图片格式
+- 调用detect程序检测图片中内容，并处理（注：detect的代码并未提供）
+- 如果图片处理能力小于视频 的FPS，会按时延向上取整后跳过后续若干帧
+- 将图片回推到房间里，格式为BGR，（对，URTC SDK里的设置为RGB，必须是这样）
+- Python的环境上需要安装对应的opencv，opencv需要支持h264 codec
+- 按需安装对应的tensorflow, yolo等 AI库
 
 ## 如果在目标机器上编译使用下面的命令
 
