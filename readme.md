@@ -30,10 +30,20 @@ cmake ../.
 # 编译成功后，在../bin中生成可执行文件
 make
 # 执行
-cd ..
-bin/enginedemo roomid  userid  其中 roomid 和userid 指定为自己的房间标识和用户标识
 
-客户端 https://web.urtc.com.cn 加入 roomid 指定的房间 观看视频
+# 以下只需要做一次
+# 修改/etc/ld.so.conf.d/xxx.conf文件，将相应urtc的so以及本项目生成的so所在目录放入
+ldconfig -v 
+
+cd ../python
+修改python文件，
+1. 将appid/secret /room id /user id修改成自己需要的
+2. 检查OnRemoteFrame中的实现，根据需要处理视频图象回调
+
+执行python3
+python3 fb_det.py 
+
+客户端 或Web 加入 roomid 指定的房间 输入视频源或者观看视频
 ```
 
 
